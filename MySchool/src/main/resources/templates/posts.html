@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{layout::layout(~{::title},~{},~{::#content},~{})}">
+<head th:replace="~{head::head(~{::title})}">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="content">
+		<h1>게시글</h1>
+		<a href="addpost">글작성</a>
+		<table>
+			<tr><th>번호</th><th>제목</th><th>작성일</th></tr>
+			<tr th:each="post: ${posts}">
+				<td th:text="${post.postId}"></td>
+				<td>
+					<a th:href="@{posts/{id}(id=${post.postId})}">
+					<p th:text="${post.title}"></p>
+					</a>
+				</td>
+				<td th:text="${#dates.format(post.date,'yyyy-MM-dd')}"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

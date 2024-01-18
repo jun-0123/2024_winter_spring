@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>댓글 삭제</title>
+</head>
+<body>
+    <div>
+        <h3>댓글 삭제</h3>
+        <form id="deleteForm" th:action="@{/comment/delete/{id}(id=${comment.commentId})}" method="post">
+            <p>비밀번호: <input type="password" name="password" id="password"></p>
+            <input type="button" onclick="pwCheck()" value="댓글 삭제">
+        </form>
+        <script>
+		    var storedPassword = [[${comment.password}]];
+		    console.log('Stored Password:', storedPassword);
+			
+		    function pwCheck() {
+		        var enteredPassword = document.getElementById('password').value;
+		        console.log('Entered Password:', enteredPassword);
+		        if (enteredPassword == storedPassword) {  // Use strict equality operator
+		            document.getElementById('deleteForm').submit();
+		        } else {
+		            alert('비밀번호 틀림');
+		        }
+		    }
+</script>
+    </div>
+</body>
+</html>

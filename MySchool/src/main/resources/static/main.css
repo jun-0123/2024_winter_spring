@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'WarhavenB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/WarhavenB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+p {
+	font-family: 'WarhavenB';
+}
+
+tr, td, th, table {
+   border: 1px solid black;
+   border-collapse: collapse;
+}
+
+th, td {
+   padding: 5px;
+}

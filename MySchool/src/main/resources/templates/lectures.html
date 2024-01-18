@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{layout::layout(~{::title},~{},~{::#content})}">
+<head th:replace="~{head::head(~{::title})}">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="content">
+		<h1>Lectures</h1>
+		<table>
+			<tr><th>이름</th><th>소개</th></tr>
+			<tr th:each="lecture: ${lectures}">
+				<td th:text="${lecture.title}"></td>
+				<td th:text="${lecture.description}"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

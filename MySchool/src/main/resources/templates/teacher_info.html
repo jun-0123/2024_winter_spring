@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{layout::layout(~{::title},~{},~{::#content})}">
+<head th:replace="~{head::head(~{::title})}">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="content">
+		<h1 th:text="|${teacher.name}선생냄|"></h1>
+		
+	</div>
+</body>
+</html>

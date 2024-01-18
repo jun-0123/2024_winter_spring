@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>댓글 수정</title>
+</head>
+<body>
+    <div>
+        <h3>댓글 수정</h3>
+        <form id="updateForm" th:action="@{/comment/update/{id}(id=${comment.commentId})}" method="post">
+            <p>내용: <textarea cols="30" rows="5" name="content" th:text="${comment.content}"></textarea></p>
+            <p>비밀번호: <input type="password" name="password" id="password"></p>
+            <input type="button" onclick="pwCheck()" value="댓글 수정">
+        </form>
+        <script>
+		    var storedPassword = [[${comment.password}]];
+		    console.log('Stored Password:', storedPassword);
+			
+		    function pwCheck() {
+		        var enteredPassword = document.getElementById('password').value;
+		        console.log('Entered Password:', enteredPassword);
+		        if (enteredPassword == storedPassword) {  // Use strict equality operator
+		            document.getElementById('updateForm').submit();
+		        } else {
+		            alert('비밀번호 틀림');
+		        }
+		    }
+</script>
+    </div>
+</body>
+</html>

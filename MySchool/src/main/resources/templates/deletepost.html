@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{layout::layout(~{::title},~{},~{::#content},~{})}">
+<head th:replace="~{head::head(~{::title})}">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="content">
+    <h3>삭제</h3>
+    <form id="deleteForm" th:action="@{{id}(id=${post.postId})}" method="post">
+        <p>비밀번호: <input type="password" name="password" id="password"><br>
+        <input type="button" onclick="pwCheck()" value="삭제">
+    </form>
+<script>
+    var storedPassword = [[${post.password}]];
+    console.log('Stored Password:', storedPassword);
+	
+    function pwCheck() {
+        var enteredPassword = document.getElementById('password').value;
+        console.log('entered Password:', enteredPassword);
+        if (enteredPassword == storedPassword) {
+            document.getElementById('deleteForm').submit();
+        } else {
+            alert('비밀번호 틀림');
+        }
+    }
+</script>
+	</div>
+</body>
+</html>

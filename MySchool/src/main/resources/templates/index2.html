@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{layout::layout(~{::title},~{},~{::#content})}">
+<head th:replace="~{head::head(~{::title})}">
+<title>Home</title>
+</head>
+<body>
+	<div id="content">
+		<div th:replace="~{fragment::header}"></div>
+		<p th:text="abc"></p>
+		<p th:text="1+1"></p>
+		<div th:if="${username} != null">
+			<p th:text="${username}+ '님 반갑습니다'"></p> <!-- 더하기 연산 사용 -->
+			<p th:text="|${username}님 반갑습니다|"></p>  <!-- | 머어지 | -->
+			
+		</div>
+		<div th:if="${teacher} != null" th:object="${teacher}"> <!-- object 설정시 해당 div 내부에서 속성 즉시 호출 가능 -->
+			<h2 th:text="${teacher.name}"></h2> <!-- object 사용 X -->
+			<p th:text="*{description}"></p>  <!-- object 사용시 -->
+		</div>
+	</div>
+	<!-- Query String -->
+	<a th:href="@{/teachers(name=${teacher.name}, orderBy='teacherId')}">TEST</a>
+	<!-- Path Variable -->
+	<a th:href="@{/teachers/{id}(id=${teacher.teacherId})}">TEST</a>
+	
+	<div th:insert="~{fragment::footer}"></div>
+</body>
+</html>

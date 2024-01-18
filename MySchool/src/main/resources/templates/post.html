@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{layout::layout(~{::title},~{},~{::#content},~{::#comment})}">
+<head th:replace="~{head::head(~{::title})}">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="content">
+		<h3 th:text="${post.title}"></h3>
+		<p th:text="${#dates.format(post.date,'yyyy-MM-dd hh:mm:ss')}"></p>
+		<p th:text="${post.content}"></p>
+		<a th:href="@{update/{id}(id=${post.postId})}">수정</a>|
+		<a th:href="@{delete/{id}(id=${post.postId})}">삭제</a>
+	</div>
+	<div id="comment">
+	<h4>댓글</h4>
+		<form th:action="@{/newcomment/{id}(id=${post.postId})}" method="post">
+			<p><textarea rows="3" cols="30" name="content"></textarea><br>
+			<p>비밀번호<br>
+			<input type="password" name="password">
+			<input type="submit" value="작성">
+		</form>
+		<hr>
+		<table>
+			<tr><th>내용</th><th>작성시간</th><th></th></tr>
+			<tr th:each="comment : ${comments}">
+				<td><p th:text="${comment.content}"></p></td>
+				<td><p th:text="${#dates.format(comment.date,'yyyy-MM-dd HH:mm')}"></p></td>
+				
+				<td>
+					<a th:href="@{/comment/update/{id}(id=${comment.commentId})}">수정</a>|
+					<a th:href="@{/comment/delete/{id}(id=${comment.commentId})}">삭제</a>
+				</td>
+				
+			</tr>
+		</table>
+		
+	</div>
+</body>
+</html>
