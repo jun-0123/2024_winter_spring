@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thmeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extrags/spring-security"
+	th:fragment="layout(title,content, script)">
+<head>
+<meta charset="UTF-8">
+<title th:replace="${title}">Insert title here</title>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+	<a th:href="@{/}">Home</a>
+	<a th:href="@{/memos}">Memos</a>
+	<th:block sec:authorize="isAnonymous()" >
+	<a th:href="@{/join}">회원가입</a>
+	<a th:href="@{/signin}">들어가기</a>
+	</th:block>
+	<th:block sec:authorize="isAuthenticated()">
+		<form th:action="@{/signout}" method="post">
+			<label sec:authentication="name"></label>
+			<input type="submit" value="나가기">
+		</form>
+	</th:block>
+	 <br>
+	 <div th:replace="${content}"></div>
+	<th:block th:replace="${script}"></th:block>	
+</body>
+</html>

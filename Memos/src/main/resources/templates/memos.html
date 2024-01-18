@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout::layout(~{::title}, ~{::#content},~{})}">
+<head>
+<meta charset="UTF-8">
+<title>Memos::Mine</title>
+</head>
+<body>
+	<div id="content">
+		<form th:action="@{/memos}" method="post" enctype="multipart/form-data">
+			<textarea type="text" name="body"></textarea>
+			<input type="file" name="file">
+			<input type="submit" value="ADD">
+		</form>
+		<br>
+		
+		<table>
+			<tr><th>ID</th><th>내용</th><th>작성자</th><th>작성시간</th><th></th></tr>
+			<tr th:each="memo : ${memos}">
+				<td><p th:text="${memo.id}"></p></td>
+				<td><p th:text="${memo.body}"></p><img th:if="${memo.fileName}!=null" th:src="@{|/uploads/${memo.fileName}|}"></td>
+				<td><p th:text="${memo.username}"></p></td>
+				<td><p th:text="${#temporals.format(memo.createdAt,'yyyy-MM-dd HH:mm')}"></p></td>
+				
+				<td>
+					<form th:action="@{/memos/delete/{id}(id=${memo.id})}" method="post">
+						<input type="submit" value="DELETE">
+					</form>
+				</td>
+				
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
