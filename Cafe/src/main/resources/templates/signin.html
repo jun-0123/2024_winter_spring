@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout::layout(~{::title},~{::#content},~{::script})}">
+<head>
+<meta charset="UTF-8">
+<title>Members::Sign in</title>
+</head>
+<body>
+	<div id="content">
+		<h2>들어가기</h2>
+		<div th:if="#{message} != null">
+			<p th:text="${message}"></p>
+		</div>
+		<form th:action="@{/signin}" method="post" onsubmit="return check()">
+			<label for="username">관리자아이디</label>
+			<input type="text" name="username" id="username"><br>
+			<label for="password">비밀번호</label>
+			<input type="password" name="password" id="password"><br>
+			<input type="submit" value="확인">
+		</form>
+	</div>
+	<script>
+		function check(){
+			const user = document.getElementId('username').value;
+			const pw = document.getElementId('password').value;
+			
+			if(user.length == 0 || pw.length == 0){
+				alert('아 모든 창을 입력하세요오오오오옹');
+				return false;
+				}
+				return true;
+		}
+	</script>
+</body>
+</html>

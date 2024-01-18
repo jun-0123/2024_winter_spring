@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout::layout(~{::title},~{::#content},~{})}">
+<head>
+<meta charset="UTF-8">
+<title>Members</title>
+</head>
+<body>
+	<div id="content">
+		<form th:action="@{/members}" method="post">
+			<textarea type="text" name="body"></textarea>
+			<input type="submit" value="ADD">
+		</form>
+		<br>
+		
+		<table>
+			<tr><th>전화번호</th><th>포인트</th><th></th></tr>
+			<tr th:each="member : ${members}">
+				<td><p th:text="${member.pno}"></td>
+				<td><p th:text="${member.point}"></td>
+				<td>
+				<form th:action="@{/updatePoint/{pno}(pno=${member.pno})}" method="post">
+					<input type="text" name="point">
+					<input type="submit" value="증감">
+				
+				</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
